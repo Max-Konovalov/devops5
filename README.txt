@@ -1,21 +1,21 @@
 Лабораторная работа 5
 Коновалов Максим Алексеевич, УБВТ2301
 
-Реализовал пять тестов в tests/test_user.py. Добавил сброс базы перед
-каждым тестом. Все тесты прошли в Python 3.12. Собрал и запустил образ.
+Дописал тесты API, настроил тестирование, сборку и публикацию образа.
+Тесты в dev и main прошли в GitHub Actions. Образ опубликован в Docker Hub.
 
-Локальный запуск тестов:
+Репозиторий: https://github.com/Max-Konovalov/devops5
+Образ: maxkoyt/devops5:latest (также тег tagname)
+
+Запуск опубликованного образа:
+docker pull maxkoyt/devops5:latest
+docker run --rm -p 8080:8080 maxkoyt/devops5:latest
+Swagger: http://127.0.0.1:8080/docs
+
+Локальные тесты:
 python -m pip install -r requirements.txt -r requirements-test.txt
 python -m pytest tests/ -v
 
-Сборка образа:
-docker build -t mkonovalov-lab5:local .
-docker run --rm -p 8090:8080 mkonovalov-lab5:local
-
-Подготовил .github/workflows/tests.yml и build-and-delivery.yml.
-Запуск в GitHub Actions и публикация на Docker Hub пока не выполнены.
-Для завершения нужно подключить GitHub-репозиторий, задать переменную
-DOCKERHUB_USERNAME и секрет DOCKERHUB_TOKEN в настройках Actions.
-После push в dev должны пройти тесты, после слияния в main должны
-пройти тесты, сборка и публикация my-app:latest.
-Готового отчёта №5 пока нет: нужен фактический результат удалённого запуска.
+Тесты запускаются при каждом push. После успешных тестов в main
+запускается сборка и публикация. В Actions нужен секрет DOCKERHUB_TOKEN.
+Значение токена не хранится в проекте.
